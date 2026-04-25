@@ -76,6 +76,34 @@ The existing Xpdf build already shows this pattern for `pdftotext`, including:
 - `-fsanitize-coverage=inline-8bit-counters`
 - `-Wl,--wrap=malloc` and related wrappers
 
+In the Xpdf source tree, these lines belong in
+`xpdf-4.06/xpdf/CMakeLists.txt`, in the `pdftotext` target block
+immediately after `add_executable(pdftotext ...)`:
+
+```cmake
+target_compile_definitions(pdftotext PRIVATE main=targetMain)
+
+target_link_options(pdftotext PRIVATE
+    "-Wl,--wrap=malloc"
+    "-Wl,--wrap=calloc"
+    "-Wl,--wrap=free"
+    "-Wl,--wrap=exit"
+    "-Wl,--wrap=fopen"
+    "-Wl,--wrap=fclose"
+    "-Wl,--wrap=realloc"
+)
+
+target_link_libraries(pdftotext PRIVATE
+    /home/joon/assignments/obj14/libobj14hook.a
+    goo
+    fofi
+    ${PAPER_LIBRARY}
+    ${LCMS_LIBRARY}
+    ${FONTCONFIG_LIBRARY}
+    ${CMAKE_THREAD_LIBS_INIT}
+)
+```
+
 The target shim also expects these environment variables to be set before fuzzing:
 
 - `CLOSURE_GLOBAL_SECTION_ADDR`
