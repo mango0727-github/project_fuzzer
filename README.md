@@ -29,7 +29,7 @@ The current setup is tailored to an instrumented `pdftotext` target from Xpdf, b
 - `fuzzer_internal.h`: shared constants, defaults, and cross-module declarations.
 - `pdf.dict`: mutation dictionary used for token insertion.
 - `seeds/`: initial PDF corpus.
-- `interesting/`, `crashes/`: local directories in the repo. The runtime currently writes interesting inputs under `/dev/shm/trial14/interesting`.
+- `interesting/`, `crashes/`: local directories in the repo. The runtime currently writes interesting inputs under `/dev/shm/dev/shm/temp_fuzzer_workdir/interesting`.
 - `xpdf-4.06/`: target source tree used in the current setup.
 
 ## Build
@@ -125,7 +125,7 @@ In the current tree, the main driver takes:
 Example with the instrumented Xpdf `pdftotext` target:
 
 ```bash
-mkdir -p /dev/shm/trial14/interesting
+mkdir -p /dev/shm/dev/shm/temp_fuzzer_workdir/interesting
 ./xpdf-4.06/build/xpdf/pdftotext ./xpdf-4.06/build/xpdf/pdftotext 1
 ```
 
@@ -155,7 +155,7 @@ An input is considered interesting when it increases at least one byte in the gl
 
 - copies the testcase into the in-memory corpus
 - increments `interesting_cnt`
-- writes the input to `/dev/shm/trial14/interesting`
+- writes the input to `/dev/shm/dev/shm/temp_fuzzer_workdir/interesting`
 
 This makes the corpus self-expanding during a run.
 
@@ -176,19 +176,18 @@ This is the core tradeoff: higher throughput than process-per-input fuzzing, but
 - The current mutation strategy is PDF-specific.
 - Crash persistence is not fully wired into a dedicated `crashes/` output path in the current main loop.
 - The runtime assumes the target can be safely reinvoked after the custom cleanup/reset sequence.
-- The default output directory is hardcoded to `/dev/shm/trial14`.
 - The current setup is tied to the way the Xpdf target was instrumented and linked.
 
 ## Quick Start
 
 ```bash
 make
-mkdir -p /dev/shm/trial14/interesting
+mkdir -p /dev/shm/dev/shm/temp_fuzzer_workdir/interesting
 ./xpdf-4.06/build/xpdf/pdftotext ./xpdf-4.06/build/xpdf/pdftotext 1
 ```
 
 After the run starts, check:
 
 - stdout for periodic stats
-- `/dev/shm/trial14/Real_World_Fuzzer_Result.txt` for the persistent log
-- `/dev/shm/trial14/interesting/` for coverage-increasing PDFs
+- `/dev/shm/dev/shm/temp_fuzzer_workdir/Real_World_Fuzzer_Result.txt` for the persistent log
+- `/dev/shm/dev/shm/temp_fuzzer_workdir/interesting/` for coverage-increasing PDFs
