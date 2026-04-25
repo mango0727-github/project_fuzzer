@@ -1,0 +1,12 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/joon/assignments/obj14/xpdf-4.06/build/cmake_install.cmake",
+		"/home/joon/assignments/obj14/xpdf-4.06/build/goo/cmake_install.cmake",
+		"/home/joon/assignments/obj14/xpdf-4.06/build/fofi/cmake_install.cmake",
+		"/home/joon/assignments/obj14/xpdf-4.06/build/splash/cmake_install.cmake",
+		"/home/joon/assignments/obj14/xpdf-4.06/build/xpdf/cmake_install.cmake",
+		"/home/joon/assignments/obj14/xpdf-4.06/build/xpdf-qt/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

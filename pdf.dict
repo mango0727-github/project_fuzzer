@@ -1,0 +1,37 @@
+# Structure & Critical Delimiters
+"%PDF-1.7"
+"obj"
+"endobj"
+"stream"
+"endstream"
+"trailer"
+"xref"
+"<<"
+">>"
+"R"
+
+# Critical Hierarchy (필수 구조)
+"/Root"
+"/Pages"
+"/Page"
+"/Size"
+"/Prev"
+
+# Crash Targets 1: Stream Parsing (Heap Overflow 유발)
+"/Length"
+"/Filter"
+"/DecodeParms"
+"/FlateDecode"
+"/LZWDecode"
+
+# Crash Targets 2: Integer Overflow (메모리 할당 공격)
+"/Predictor"
+"/Columns"
+"/Colors"
+"/BitsPerComponent"
+"/Width"
+"/Height"
+
+# Crash Targets 3: Complex Structures
+"/ObjStm"
+"/XRefStm"
