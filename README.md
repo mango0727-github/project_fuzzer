@@ -34,25 +34,22 @@ The current setup is tailored to an instrumented `pdftotext` target from Xpdf, b
 
 ## Build
 
-The Makefile builds a static library, `libobj14hook.a`, that is linked into the target.
+The Makefile builds a static library, `libmainhook.a`, that is linked into the target.
 
 Available build targets:
 
-- `make fuzzer_step1`: strict warning-oriented build
-- `make fuzzer_step3`: optimized build
-- `make llvm_testing_step5`: ASan + UBSan build
-- `make fuzzer_release_step5`: optimized build with strict warnings enabled
+- `make`: default build; optimized with strict warnings enabled
 
 Typical build:
 
 ```bash
-make fuzzer_release_step5
+make
 ```
 
 This produces:
 
 ```text
-libobj14hook.a
+libmainhook.a
 ```
 
 ## Target Integration
@@ -144,13 +141,13 @@ Each trial runs for up to 24 hours:
 
 By default, the fuzzer uses these paths from `fuzzer_internal.h`:
 
-- temp input: `/dev/shm/trial14/temp_fuzz_input.pdf`
-- result log: `/dev/shm/trial14/Real_World_Fuzzer_Result.txt`
-- interesting inputs: `/dev/shm/trial14/interesting`
+- temp input: `/dev/shm/temp_fuzzer_workdir/temp_fuzz_input.pdf`
+- result log: `/dev/shm/temp_fuzzer_workdir/Real_World_Fuzzer_Result.txt`
+- interesting inputs: `/dev/shm/temp_fuzzer_workdir/interesting`
 - seed corpus: `seeds`
 - dictionary: `pdf.dict`
 
-Make sure `/dev/shm/trial14/interesting` exists before starting a run.
+Make sure `/dev/shm/temp_fuzzer_workdir/interesting` exists before starting a run.
 
 ## How Interesting Inputs Are Chosen
 
@@ -185,7 +182,7 @@ This is the core tradeoff: higher throughput than process-per-input fuzzing, but
 ## Quick Start
 
 ```bash
-make fuzzer_release_step5
+make
 mkdir -p /dev/shm/trial14/interesting
 ./xpdf-4.06/build/xpdf/pdftotext ./xpdf-4.06/build/xpdf/pdftotext 1
 ```

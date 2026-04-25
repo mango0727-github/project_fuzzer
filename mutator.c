@@ -13,7 +13,7 @@ int dict_size = 0;
 void load_dict(const char *file_name) {
   FILE *file = fopen(file_name, "r");
   if (!file) {
-    fprintf(stderr, "[warn] dictionary open failed: %s\n", file_name);
+    fprintf(stderr, "dictionary open failed: %s\n", file_name);
     return;
   }
 
@@ -21,7 +21,7 @@ void load_dict(const char *file_name) {
 
   while (fgets(line, sizeof(line), file)) {
     if (dict_size >= MAX_DICTIONARY_ENTRIES) {
-      fprintf(stderr, "[warn] dictionary capacity reached\n");
+      fprintf(stderr, "dictionary capacity reached\n");
       break;
     }
 

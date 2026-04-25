@@ -31,10 +31,10 @@ extern "C" {
 
 #define DEFAULT_DICT_PATH "pdf.dict"
 #define DEFAULT_SEED_DIR "seeds"
-#define DEFAULT_WORK_DIR "/dev/shm/trial14"
-#define DEFAULT_INTERESTING_DIR "/dev/shm/trial14/interesting"
-#define DEFAULT_OUTPUT_PATH "/dev/shm/trial14/Real_World_Fuzzer_Result.txt"
-#define DEFAULT_TEMP_INPUT_PATH "/dev/shm/trial14/temp_fuzz_input.pdf"
+#define DEFAULT_WORK_DIR "/dev/shm/temp_fuzzer_workdir"
+#define DEFAULT_INTERESTING_DIR "/dev/shm/temp_fuzzer_workdir/interesting"
+#define DEFAULT_OUTPUT_PATH "/dev/shm/temp_fuzzer_workdir/Real_World_Fuzzer_Result.txt"
+#define DEFAULT_TEMP_INPUT_PATH "/dev/shm/temp_fuzzer_workdir/temp_fuzz_input.pdf"
 
 // Shared types
 typedef struct seed_struct {
