@@ -91,7 +91,7 @@ target_link_options(pdftotext PRIVATE
 )
 
 target_link_libraries(pdftotext PRIVATE
-    /home/joon/assignments/obj14/libobj14hook.a
+    YOURWORKDIR/libmainhook.a
     goo
     fofi
     ${PAPER_LIBRARY}
