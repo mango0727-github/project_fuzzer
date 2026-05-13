@@ -78,7 +78,7 @@ The target shim also expects these environment variables to be set before fuzzin
 - `CLOSURE_GLOBAL_SECTION_ADDR`
 - `CLOSURE_GLOBAL_SECTION_SIZE`
 
-These are used to snapshot and restore writable global state between iterations.
+These are used to snapshot and restore writable global state between iterations, which is the core part for the single-process fuzzing.
 
 
 
