@@ -46,14 +46,7 @@ The fuzzer library expects the target to be linked with:
   - `exit`
 - the target entry renamed to `targetMain`
 
-The existing Xpdf build already shows this pattern for `pdftotext`, including:
-
-- `-Dmain=targetMain`
-- `-fsanitize-coverage=inline-8bit-counters`
-- `-Wl,--wrap=malloc` and related wrappers
-
-In the Xpdf source tree, these lines belong in
-`xpdf-4.06/xpdf/CMakeLists.txt`, in the `pdftotext` target block
+In the Xpdf source tree, these lines should be added to `xpdf-4.06/xpdf/CMakeLists.txt`, in the `pdftotext` target block
 immediately after `add_executable(pdftotext ...)`:
 
 ```cmake
